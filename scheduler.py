@@ -32,24 +32,22 @@ class Scheduler:
                 func()
 
 
-shed = Scheduler()
+if __name__ == "__main__":
+    shed = Scheduler()
 
+    def countdown(n: int) -> None:
+        if n > 0:
+            print("Down", n)
+            shed.call_later(4, lambda: countdown(n - 1))
 
-def countdown(n: int) -> None:
-    if n > 0:
-        print("Down", n)
-        shed.call_later(4, lambda: countdown(n - 1))
+    def countup(stop: int) -> None:
+        def _run(x: int):
+            if x < stop:
+                print("Up", x)
+                shed.call_later(1, lambda: _run(x + 1))
 
+        _run(0)
 
-def countup(stop: int) -> None:
-    def _run(x: int):
-        if x < stop:
-            print("Up", x)
-            shed.call_later(1, lambda: _run(x + 1))
-
-    _run(0)
-
-
-shed.call_later(4, lambda: countdown(5))
-shed.call_later(1, lambda: countup(20))
-shed.run()
+    shed.call_later(4, lambda: countdown(5))
+    shed.call_later(1, lambda: countup(20))
+    shed.run()

@@ -9,13 +9,13 @@ class Awaitable:
         yield
 
 
-def switch():
+def switch() -> Awaitable:
     return Awaitable()
 
 
 class Scheduler:
     def __init__(self) -> None:
-        self.ready = deque()
+        self.ready: deque[Generator | None] = deque()
         self.sleeping = []
         self.sequence = 0
         self.current: Generator | None = None

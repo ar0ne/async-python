@@ -1,3 +1,4 @@
+import inspect
 from collections import deque
 from collections.abc import Callable
 
@@ -30,8 +31,11 @@ class EventLoop:
         future = Future()
 
         def wrapper():
-            try:
+            if inspect.isawaitable(coro):
+                res = yield from coro.__await__()
+            else:
                 res = yield from coro
+            try:
                 future.set_result(res)
             except Exception as exc:
                 future.set_exception(exc)

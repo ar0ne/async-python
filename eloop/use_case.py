@@ -12,10 +12,16 @@ def test():
     print(time.monotonic(), "completed")
 
 
+# coroutine
+async def atest():
+    await sleep(2)
+    print(time.monotonic(), "completed")
+
+
 if __name__ == "__main__":
     loop = EventLoop()
     print("Start", time.monotonic())
+    loop.create_task(atest())
     loop.create_task(test())
-    loop.create_task(test())
-    loop.run_until_complete(test())
+    loop.run_until_complete(atest())
     print("Finish", time.time())

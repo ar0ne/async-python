@@ -3,7 +3,7 @@ import time
 from collections.abc import Callable
 from functools import partial
 
-from eloop.future import Future
+from event_loop.future import Future
 
 
 class CallbackHandler:

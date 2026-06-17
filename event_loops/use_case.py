@@ -1,6 +1,6 @@
 import time
 
-from event_loop.event_loop import EventLoop
+from event_loops.event_loop import EventLoop
 
 
 def sleep(delay: int):

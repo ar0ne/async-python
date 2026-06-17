@@ -2,8 +2,8 @@ import inspect
 from collections import deque
 from collections.abc import Callable
 
-from event_loop.callback_handler import CallbackHandler
-from event_loop.future import Future
+from event_loops.callback_handler import CallbackHandler
+from event_loops.future import Future
 
 
 class EventLoop:
